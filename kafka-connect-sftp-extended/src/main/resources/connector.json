@@ -1,0 +1,23 @@
+{
+  "name": "sftp-source",
+  "config": {
+    "connector.class": "org.apache.camel.kafkaconnector.sftp.CamelSftpSourceConnector",
+    "tasks.max": "1",
+    "topics": "test123",
+
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "org.apache.kafka.connect.converters.ByteArrayConverter",
+
+    "camel.source.path.host": "127.0.0.1",
+    "camel.source.path.port": 9922,
+    "camel.source.path.directoryName": "/foo-home/in",
+    "camel.source.endpoint.username": "foo",
+    "camel.source.endpoint.password": "pass",
+    "camel.source.endpoint.initialDelay": 10,
+    "camel.source.endpoint.delay": "50",
+    "camel.source.endpoint.delete": true,
+
+    "transforms":"RemoteTransformer",
+    "transforms.RemoteTransformer.type":"guru.bonacci.kafka.RemoteFileTransforms"
+  }
+}
