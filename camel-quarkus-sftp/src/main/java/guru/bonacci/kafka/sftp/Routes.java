@@ -29,12 +29,19 @@ import lombok.AllArgsConstructor;
 @ApplicationScoped
 public class Routes extends EndpointRouteBuilder {
 
-	private final KafkaProcessor kafka;
-    
     @Override
     public void configure() throws Exception {
-        from("platform-http:/fruits?httpMethodRestrict=POST")
-        		.setBody().constant("blablaaaaaa")
-                .process(kafka);
+    	final String brokers = "abc:9092";
+    	final String saslJaasConfig = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"USERNAME\" password=\"PASSWORD\"";
+
+    	
+        from(platformHttp("/fruits").httpMethodRestrict("POST"))
+        		.setBody().constant("blablbbbbbb")
+                .to(kafka("jeff-json")
+                   .brokers(brokers)
+                   .saslMechanism("PLAIN") 
+                   .securityProtocol("SASL_SSL")
+                   .sslEndpointAlgorithm("https")
+                   .saslJaasConfig(saslJaasConfig));
     }
 }
