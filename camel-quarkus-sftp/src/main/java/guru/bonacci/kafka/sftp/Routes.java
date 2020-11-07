@@ -9,11 +9,10 @@ import java.util.Properties;
 
 import javax.enterprise.context.ApplicationScoped;
 
+import lombok.AllArgsConstructor;
 import org.apache.camel.builder.endpoint.EndpointRouteBuilder;
 import org.apache.camel.dataformat.bindy.csv.BindyCsvDataFormat;
 import org.apache.camel.model.dataformat.JsonLibrary;
-
-import lombok.AllArgsConstructor;
 
 @ApplicationScoped
 @AllArgsConstructor
