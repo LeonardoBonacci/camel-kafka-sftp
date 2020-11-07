@@ -26,18 +26,22 @@ public class Routes extends EndpointRouteBuilder {
     	final Properties props = loadConfig("C:\\configs\\confluent\\cloud-test.properties");
     	final String topic = "jeff-json";
     			
-        from(platformHttp("/fruits").httpMethodRestrict("POST"))
-        		.setBody().constant("aa,bb,cc,dd\nff,gg,hh,ii")
-        		.split(bodyAs(String.class).tokenize("\n"))
-        		.unmarshal(bindy)
-    		    .marshal()
-    		    .json(JsonLibrary.Jackson)
-    		    .to(kafka(topic)
-                   .brokers(props.getProperty("bootstrap.servers"))
-                   .saslMechanism(props.getProperty("sasl.mechanism")) 
-                   .securityProtocol(props.getProperty("security.protocol"))
-                   .sslEndpointAlgorithm(props.getProperty("ssl.endpoint.identification.algorithm"))
-                   .saslJaasConfig(props.getProperty("sasl.jaas.config")));
+        from(sftp("127.0.0.1:9922/foo-home/in")
+        		.username("foo")
+        		.password("pass")
+        		.initialDelay(10)
+        		.delay(50)
+        		.delete(true))
+    		.split(bodyAs(String.class).tokenize("\n"))
+    		.unmarshal(bindy)
+		    .marshal()
+		    .json(JsonLibrary.Jackson)
+		    .to(kafka(topic)
+               .brokers(props.getProperty("bootstrap.servers"))
+               .saslMechanism(props.getProperty("sasl.mechanism")) 
+               .securityProtocol(props.getProperty("security.protocol"))
+               .sslEndpointAlgorithm(props.getProperty("ssl.endpoint.identification.algorithm"))
+               .saslJaasConfig(props.getProperty("sasl.jaas.config")));
     }
 
 	//TODO load external configs in Quarkus?
