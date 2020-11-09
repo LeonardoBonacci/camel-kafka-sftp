@@ -12,10 +12,10 @@ import org.apache.camel.dataformat.bindy.annotation.DataField;
 @AllArgsConstructor
 @RegisterForReflection
 @CsvRecord(separator = ",")
-public class Sample {
+public class Foo {
 
-	@DataField(pos = 1) String f1;
-	@DataField(pos = 2) String f2;
-	@DataField(pos = 3) String f3;
-	@DataField(pos = 4) String f4;
+	@DataField(pos = 1) public String f1;
+	@DataField(pos = 2) public String f2;
+	@DataField(pos = 3) public String f3;
+	@DataField(pos = 4) public String f4;
 }
