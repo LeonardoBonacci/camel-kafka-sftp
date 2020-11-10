@@ -1,16 +1,15 @@
 package guru.bonacci.kafka.sftp;
 
-import io.quarkus.runtime.annotations.RegisterForReflection;
+import org.apache.camel.dataformat.bindy.annotation.CsvRecord;
+import org.apache.camel.dataformat.bindy.annotation.DataField;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.camel.dataformat.bindy.annotation.CsvRecord;
-import org.apache.camel.dataformat.bindy.annotation.DataField;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@RegisterForReflection
 @CsvRecord(separator = ",")
 public class Foo {
 

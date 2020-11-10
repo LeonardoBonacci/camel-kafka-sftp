@@ -24,7 +24,7 @@ public class Routes extends EndpointRouteBuilder {
 
 	@Override
     public void configure() throws Exception {
-    	final Properties props = loadConfig("C:\\configs\\confluent\\cloud-test-sr.properties");
+    	final Properties props = loadConfig("/path/to/ccloud/config.properties");
     	final String topic = "some-jsonschema-topic";
 
 		Map<String, Object> addProps = new HashMap<>();
